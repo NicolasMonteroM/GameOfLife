@@ -1,26 +1,75 @@
 package Model;
 
-import processing.core.PApplet;
 
-public class Organismo implements Runnable {
+import processing.core.PApplet;
+import processing.core.PImage;
+
+public abstract class Organismo implements Runnable {
 
 	float x;
 	float y;
-	boolean estado;
+	String estado;
 	int edad;
-	boolean sexo;
+	String sexo;
 	int velocidad;
-	int direccion;
+	int direccionX;
+	int direccionY;
 	PApplet app;
+	PImage imagen;
 
-	public Organismo(PApplet app, boolean estado, int edad, boolean sexo, float x, float y) {
+	public Organismo(PApplet app, String estado, int edad, String sexo, int vel) {
 		this.app = app;
-		this.x = 4;
-		this.y = 3;
-		
+		this.estado = estado;
+		this.edad = edad;
+		this.sexo = sexo;	
+		this.velocidad = vel;
+		this.x = app.random(100, this.app.width - 100);
+		this.y = app.random(100, this.app.height - 100);
+		this.direccionX = 1;
+		this.direccionY = 1;
 
 	}
-
+	
+	@Override
+	public int hashCode() {
+		int result  = (int)(this.x + this.y);
+		return result;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		return super.equals(obj);
+	}
+	
+	@Override
+	public void run() {
+		
+		while(this.getEstado().equals("vivo")) {
+			try {
+				
+				this.x += this.velocidad*this.direccionX;
+				this.y += this.velocidad*this.direccionY;
+				
+				if(this.x <= 0 || this.x >= this.app.width-40 ) {
+					this.direccionX *= -1;
+				}
+				
+				if(this.y <= 0 || this.y >= this.app.height-40) {
+					this.direccionY *= -1;				
+				}
+				
+				Thread.sleep(100);
+				
+			}catch(InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
+	
+	public abstract void pintar();
+	
+		
 	public float getPosX() {
 		return x;
 	}
@@ -37,11 +86,11 @@ public class Organismo implements Runnable {
 		this.y = y;
 	}
 
-	public boolean isEstado() {
+	public String isEstado() {
 		return estado;
 	}
 
-	public void setEstado(boolean estado) {
+	public void setEstado(String estado) {
 		this.estado = estado;
 	}
 
@@ -53,11 +102,11 @@ public class Organismo implements Runnable {
 		this.edad = edad;
 	}
 
-	public boolean isSexo() {
+	public String isSexo() {
 		return sexo;
 	}
 
-	public void setSexo(boolean sexo) {
+	public void setSexo(String sexo) {
 		this.sexo = sexo;
 	}
 
@@ -68,26 +117,41 @@ public class Organismo implements Runnable {
 	public void setVelocidad(int velocidad) {
 		this.velocidad = velocidad;
 	}
-
-	public void comer(Organismo a, Organismo b) {
-		
-		
-
-	}
-
-	public void nacer() {
-
-	}
 	
-	public void pintar() {
-		
-		
+	public PImage getImagen() {
+		return imagen;
+	}
+
+	public void setImagen(PImage imagen) {
+		this.imagen = imagen;
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public String getSexo() {
+		return sexo;
+	}
+
+	public float getX() {
+		return x;
+	}
+
+	public void setX(float x) {
+		this.x = x;
+	}
+
+	public float getY() {
+		return y;
+	}
+
+	public void setY(float y) {
+		this.y = y;
 	}
 
 	
-	public void run() {
-		// TODO Auto-generated method stub
+	
 
-	}
 
 }

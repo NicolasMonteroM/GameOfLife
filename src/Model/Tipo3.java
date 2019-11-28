@@ -4,17 +4,27 @@ import processing.core.PApplet;
 
 public class Tipo3 extends Organismo {
 	
-	public Tipo3(PApplet app, boolean estado, int edad, boolean sexo, float x, float y) {
-
-		super(app, estado, edad, sexo, x, y);
-
+	private int tipo;
+	
+	public Tipo3(PApplet app, String estado, int edad, String sexo, int velocidad) {
+		super(app, estado, edad, sexo, velocidad);
+		if(sexo.equals("F")) {
+			super.imagen = app.loadImage("images/Tipo3F.png");
+		}else if(sexo.equals("M")) {
+			super.imagen = app.loadImage("images/Tipo3M.png");
+		}
+		this.tipo = 3;
 	}
 
 	public void pintar() {
-
-		super.app.fill(100, 0, 0);
-		super.app.ellipse(super.x, super.y, 20, 20);
-
+		app.image(super.imagen, super.x, super.y,60,60);
 	}
 
+	public int getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(int tipo) {
+		this.tipo = tipo;
+	}	
 }
