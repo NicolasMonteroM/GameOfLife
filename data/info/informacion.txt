@@ -6,3 +6,5 @@
 1,vivo,0,F,15
 2,vivo,0,M,30
 2,vivo,0,F,30
+3,vivo,0,M,5
+3,vivo,0,F,5

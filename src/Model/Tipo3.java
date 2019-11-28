@@ -11,7 +11,7 @@ public class Tipo3 extends Organismo {
 		if(sexo.equals("F")) {
 			super.imagen = app.loadImage("images/Tipo3F.png");
 		}else if(sexo.equals("M")) {
-			super.imagen = app.loadImage("images/Tipo3M.png");
+			super.imagen = app.loadImage("images/Tip3M.png");
 		}
 		this.tipo = 3;
 	}
